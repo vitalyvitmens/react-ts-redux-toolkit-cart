@@ -9,6 +9,7 @@ import { configureStore } from '@reduxjs/toolkit'
 
 const rootReducer = persistReducer(
   { key: 'redux-toolkit', storage: storage },
+  // { key: 'redux-toolkit', storage: storage, throttle: 100000 },
   combineReducers({
     products: productsSlice.reducer,
     order: orderSlice.reducer,
@@ -18,7 +19,7 @@ const rootReducer = persistReducer(
 export const store = configureStore({
   reducer: rootReducer,
   devTools: true,
-  middleware: () => [thunkMiddleware, logActionMiddleware],
+  middleware: [thunkMiddleware, logActionMiddleware],
 })
 
 export const persistor = persistStore(store)
